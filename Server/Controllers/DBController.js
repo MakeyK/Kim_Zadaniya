@@ -1,4 +1,7 @@
 const {ToDo} = require('../models/models')
+const {Sequelize} = require('../db')
+const {QueryTypes} = require('sequelize')
+const sequelize = require('../db')
 
 class DBController
 {
@@ -92,8 +95,10 @@ class DBController
     // Удаление всех записей в таблице
     async DelFull(req,res)
     {
-        const y = await ToDo.destroy()
-        return res.json(y)
+        let query_del_all=`DELETE FROM "todos"`
+        const test_del_all = await sequelize.query(query_del_all)
+        if(test_del_all) res.send({messenge: "Все записи удалены!"})
+        else res.send({ERROR: "Не удалось удалить записи!"})
     }
     // Редактирование записей по выбранному ID
     async RedId(req,res)

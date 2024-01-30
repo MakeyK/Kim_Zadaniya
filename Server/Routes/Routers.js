@@ -6,15 +6,17 @@ const FreeController = require('../Controllers/FreeController')
 const FourController = require('../Controllers/FourController')
 const FiveController = require('../Controllers/FiveController')
 
+const z3Controller = require('../Controllers/z3Controller')
 const DBController = require('../Controllers/DBController')
 const db = require('../db')
 
 // Создание таблицы и добавление записей
 router.post('/todos', DBController.create)
+router.post('/create',z3Controller.ccreate)
 
 // Выборка всех записей из таблицы
 router.get('/getall', DBController.getAll)
-
+router.get('/getal', z3Controller.getAll)
 // Фильтры
 router.get('/alltrue', DBController.getAllTrue)
 router.get('/allfalse', DBController.getAllFalse)
@@ -25,6 +27,7 @@ router.get('/get/:id', DBController.getID)
 // Удаление
 router.delete('/del/:id', DBController.DelId)
 router.delete('/delf', DBController.DelFull)
+router.delete('/dell/:id', z3Controller.DelID)
 
 // Редактирование
 router.patch('/red/:id', DBController.RedId)
@@ -36,7 +39,7 @@ router.get('/sort-d-n', DBController.getDateNew)
 router.get('/sort-d-o', DBController.getDateOld)
 router.get('/sort-up-t', DBController.getSortTrueUp)
 
-// Задание 1 
+// Занятие 1 
 router.get('/sum', OneController.summa)
 router.get('/reverse', TwoController.reverse)
 router.post('/obj', FreeController.obj_to_array)
